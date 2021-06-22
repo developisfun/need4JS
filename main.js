@@ -1,11 +1,10 @@
 const $score = document.querySelector('.score'),
 $start = document.querySelector('.start'),
+$stop = document.querySelector('.stop'),
 $gameArena = document.querySelector('.gameArena'),
 $car = document.createElement('div');
 
 $car.classList.add('car');
-
-console.log($start);
 
 const keys = {
 	ArrowUp: false,
@@ -21,17 +20,25 @@ const setting = {
 }
 
 function startGame() {
-	// $start.classList.add('hide');
-	requestAnimationFrame(playGame);
-	setting.start = true;
-	$gameArena.appendChild($car);
+	console.log('startGame');
+	if (!setting.start) {
+		requestAnimationFrame(playGame);
+		setting.start = true;
+		$gameArena.appendChild($car);	
+	}
 } 
+
+function stopGame() {
+	console.log('stopGame');
+	if (setting.start) {
+		setting.start = false;
+	}	
+}
 
 function startRun(event) {
 	event.preventDefault();
 	keys[event.key] = true;
-	// console.log(keys[event.key]);
-	// requestAnimationFrame(playGame);
+
 } 
 function stopRun(event) {
 	keys[event.key] = false;
@@ -40,14 +47,15 @@ function stopRun(event) {
 
 function playGame() {
 
-	console.log('playGame');
+	
 	if (setting.start) {
+		console.log('playGame');
 		requestAnimationFrame(playGame);
 	} 
 }
 
 
 $start.addEventListener('click', startGame);
-
+$stop.addEventListener('click', stopGame);
 document.addEventListener('keydown', startRun);
 document.addEventListener('keyup', stopRun);

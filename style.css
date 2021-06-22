@@ -1,6 +1,9 @@
 .hide {
 	display:none;
 }
+.start, .stop {
+	font-size: 36px;
+}
 
 .car {
 	width: 50px;
@@ -8,5 +11,5 @@
   position: absolute;
   bottom: 10%;
   left: 50%;
-	background: transparent url('./image/luxuryPlayer.png') center /cover no-repeat;
+	background: transparent url('./image/luxuryPlayer.png') center /cover no-repeat ;
 }
