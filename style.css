@@ -1,15 +1,59 @@
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+      	
+      }
+      body {
+        overflow: auto; /* добавить полосу прокрутки */ 
+      }
+
+button {
+	/*width: 300px;*/
+}
+
 .hide {
 	display:none;
 }
+
 .start, .stop {
 	font-size: 36px;
 }
 
-.car {
+.car, .enemy {
 	width: 50px;
 	height: 100px;
   position: absolute;
-  bottom: 10%;
-  left: 50%;
+  bottom: 5px;
+  left: 125px;
 	background: transparent url('./image/luxuryPlayer.png') center /cover no-repeat ;
+}
+.enemy {
+	
+	background: transparent url('./image/Player.png') center /cover no-repeat ;
+}
+
+.gameArena {
+	width: 300px;
+	height: 500px;
+	position: relative;
+	margin: auto;
+	background: #222;
+	overflow: hidden;
+}
+
+.line {
+	position: absolute;
+	width: 10px;
+	height: 50px;
+	background: #fff;
+	left: 145px;
+}
+
+.game {
+   min-height: 100%;
+  	border-bottom-width: 2px; /* Толщина линии внизу */
+  border-bottom-style: solid; /* Стиль линии внизу */
+  border-bottom-color: #000; /* Цвет линии внизу */
 }
