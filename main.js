@@ -5,9 +5,15 @@ $start = document.querySelector('.start'),
 $stop = document.querySelector('.stop'),
 $gameArena = document.querySelector('.gameArena'),
 $car = document.createElement('div');
+const MAXENEMY = 6;
 // const maxWidth = 
 // let lineWidth = maxWidth/12;
 $car.classList.add('car');
+
+// const $music = document.createElement('embed');
+// $music.src = './audio.mp3';
+
+const $music = new Audio('./audio.mp3');
 
 const keys = {
 	ArrowUp: false,
@@ -20,19 +26,19 @@ const setting = {
 	start: false,
 	score: 0,
 	speed: 2,
-	carspeed: 3,
-	traffic: 3,
+	carspeed: 4,
+	traffic: 2.5,
 	lineLenght:100,
 }
 
 const getQuantityElements = (heightElement) => {
-	return document.documentElement.clientHeight / heightElement +1;
+	return document.documentElement.clientHeight / heightElement ;
 }
 
-console.log(getQuantityElements(50));
-console.log(document.documentElement.clientHeight); // = 600+'px';
-console.log(`${$gameArena.offsetWidth} - ширина арены`);
-console.log(`${$gameArena.offsetHeight} - высота арены`);
+// console.log(getQuantityElements(50));
+// console.log(document.documentElement.clientHeight); // = 600+'px';
+// console.log(`${$gameArena.offsetWidth} - ширина арены`);
+// console.log(`${$gameArena.offsetHeight} - высота арены`);
 
 const moveRoad = () => {
 	let lines = document.querySelectorAll('.line');
@@ -54,6 +60,8 @@ const  getRandom = (min, max) => {
 
 const startGame = () => {
 	console.log('startGame');
+	// document.body.append($music);
+	$music.play();
 	console.log(`ширина дороги ${$gameArena.offsetWidth}`);
 	if (!setting.start) {
 		//рисуем разметку дороги
@@ -70,8 +78,11 @@ const startGame = () => {
 			$enemy.classList.add('enemy');
 			$enemy.y = -setting.lineLenght * setting.traffic * (i + 1);
 			$enemy.style.top = $enemy.y + 'px';
+
+			// console.log(`где строка ${$gameArena.offsetWidth} + ${$car.style.width}`);
 			$enemy.style.left = `${getRandom(0, $gameArena.offsetWidth - $car.offsetWidth)}px`;
-			console.log($enemy.style.left);
+			$enemy.style.background = `transparent url('./image/enemy${getRandom(1,MAXENEMY)}.png')
+				center /cover no-repeat`;
 			$gameArena.appendChild($enemy);
 		}
 		requestAnimationFrame(playGame);
@@ -89,6 +100,7 @@ const stopGame = () => {
 	console.log('stopGame');
 	if (setting.start) {
 		setting.start = false;
+		// document.body.remove($music);
 		window.location.reload();
 	}	
 }
@@ -104,6 +116,7 @@ const startRun = (event) => {
 const stopRun = (event) => {
     keys[event.key] = false;
     // setting.start = false;
+    // console.log(event.key);
 }
 
 const moveEnemy = () => {
@@ -124,16 +137,16 @@ const playGame = () => {
 		console.log('playGame');
 		moveEnemy();
 		requestAnimationFrame(playGame);
-		if (keys.ArrowLeft && setting.x > 0) {
+		if (keys.a && setting.x > 0) {
 			setting.x -= setting.carspeed;
 		}
-		if (keys.ArrowRight && setting.x < ($gameArena.offsetWidth - $car.offsetWidth) ) {
+		if (keys.d && setting.x < ($gameArena.offsetWidth - $car.offsetWidth) ) {
 			setting.x += setting.carspeed;
 		} 
-		if (keys.ArrowUp && setting.y > 0) {
+		if (keys.w && setting.y > 0) {
 			setting.y -= setting.carspeed;
 		}  
-		if (keys.ArrowDown && setting.y < ($gameArena.offsetHeight - $car.offsetHeight) ) {
+		if (keys.s && setting.y < ($gameArena.offsetHeight - $car.offsetHeight) ) {
 			setting.y += setting.carspeed;
 		}
 		$car.style.left = `${setting.x}px`;
@@ -150,3 +163,8 @@ $start.addEventListener('click', startGame);
 $stop.addEventListener('click', stopGame);
 document.addEventListener('keydown', startRun);
 document.addEventListener('keyup', stopRun);
+
+
+// const fibo = (n) => n <= 2 ? 1 : fibo(n-1) + fibo(n-2);
+
+// console.log(fibo(70));

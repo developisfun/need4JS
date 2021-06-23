@@ -29,14 +29,14 @@ button {
   left: 125px;
 	background: transparent url('./image/luxuryPlayer.png') center /cover no-repeat ;
 }
-.enemy {
+/*.enemy {
 	
-	background: transparent url('./image/Player.png') center /cover no-repeat ;
-}
+	background: transparent url('./image/enemy.png') center /cover no-repeat ;
+}*/
 
 .gameArena {
 	width: 300px;
-	height: 500px;
+	min-height: 100vh; /*500px;*/
 	position: relative;
 	margin: auto;
 	background: #222;
